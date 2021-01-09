@@ -61,41 +61,25 @@ void loop() {
 
     // read the next key
     unsigned char c = keyboard.read();
-    
+
     // Upper and lower case chars are treated especially
     if ((c >= 'a') && (c <= 'z')) {
       snprintf(temp, 19, "male_%c.wav", c);
-    }
-    else if ((c >= 'A') && (c <= 'Z')) {
+    } else if ((c >= 'A') && (c <= 'Z')) {
       snprintf(temp, 19, "female_%c.wav", c);
-    }
-    else if ( (c >= PS2_F1) && (c <= PS2_F12) ) {
-      Serial.println("HIER");
+    } else if ( (c >= PS2_F1) && (c <= PS2_F12) ) {
       snprintf(temp, 19, "piano_%d.wav", c - PS2_F1 + 1);
-    }
-    else if (c == PS2_ENTER) {
-      Serial.println();
-    } else if (c == PS2_TAB) {
-      Serial.print("[Tab]");
-    } else if (c == PS2_ESC) {
-      Serial.print("[ESC]");
+    } else if (c == PS2_o_DIAERESIS){
+      snprintf(temp, 19, "male_oe.wav");
+    } else if (c == PS2_u_DIAERESIS){
+      snprintf(temp, 19, "male_ue.wav");
+    } else if (c == PS2_a_DIAERESIS){
+      snprintf(temp, 19, "male_ae.wav");
     } else if (c == PS2_PAGEDOWN) {
-      Serial.print("[PgDn]");
       tmrpcm.volume(0);
     } else if (c == PS2_PAGEUP) {
-      Serial.print("[PgUp]");
       tmrpcm.volume(1);
-    } else if (c == PS2_LEFTARROW) {
-      Serial.print("[Left]");
-    } else if (c == PS2_RIGHTARROW) {
-      Serial.print("[Right]");
-    } else if (c == PS2_UPARROW) {
-      Serial.print("[Up]");
-    } else if (c == PS2_DOWNARROW) {
-      Serial.print("[Down]");
-    } else if (c == PS2_DELETE) {
-      Serial.print("[Del]");
-    } else if ( (c>32) && (c<128) ) {
+    } else if ( (c > 32) && (c < 128) ) {
       // otherwise, just try to say the characters
       snprintf(temp, 19, "male_%c.wav", c);
       Serial.println(temp);
